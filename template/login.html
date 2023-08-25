@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+    <div style="width: 500px" id="reader"></div>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="">Roll </label>
+        <input type="text" name="roll" id="">
+        <br><br>
+        <label for="">Date of Birth </label>
+        <input type="date" name="dateofbirth" id="">
+        <button>Login</button>
+    </form>
+
+    <script>
+        function onScanSuccess(decodedText, decodedResult) {
+            
+            window.location =  "dashboard/user_data".replace("user_data", decodedText)
+        }
+
+        function onScanFailure(error) {
+            // handle scan failure, usually better to ignore and keep scanning.
+            // for example:
+            console.warn(`Code scan error = ${error}`);
+        }
+
+        let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        { fps: 10, qrbox: {width: 250, height: 250} },
+        /* verbose= */ false);
+        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% load qr_code %}
+<form  method="post">
+    {% csrf_token %}
+    <label for="">Name:  </label>
+    <input type="text" name="name" placeholder="Name">
+    <br>
+    <br>
+    <label for="">Roll: </label>
+    <input type="number" name="roll" placeholder="Roll">
+    <br>
+    <br>
+    <label for="">Date of Birth: </label>
+    <input type="date" name="birth"  placeholder="Date of Birth">
+    <br>
+    <br>
+    <label for="">Session: </label>
+    <input type="number" name="1st_session" value="2020" max="2100" min="1950" step="1">
+    <label for=""> to </label>
+    <input type="number" name="2nd_session" value="2021" max="2100" min="1950" step="1">
+    <br>
+    <br>
+    <input type="radio" name="shift" id="1st" value="1st"> <label for="1st">Frist Shift</label>
+    <input type="radio" name="shift" id="2nd" value="2nd"> <label for="2nd">Second Shift</label>
+    <br>
+    <br>
+    <button type="submit">Add Data</button>
+</form>
+{% if messages %}
+    {% for message in messages %}
+        <h5>{{ message }}</h5>
+    {% endfor %}
+{% endif %}
+
+{% if data %}
+    <p>Save this qr_code. You have needed it for login</p>
+    {% qr_from_text data size=12 image_format="png" error_correction="L" border=2 %}
+{% endif %}

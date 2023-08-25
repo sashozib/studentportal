@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ student.roll }}</title>
+</head>
+<body>
+    <h1>Roll: {{ student.roll }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="nameid" value="{{ student.name }}" required readonly>
+        <br><br>
+        <label for="name">Birth Date: </label>
+        <input type="date" name="birth_date" title="birth_date" id="dateid" value="{{ student.birth_date|date:'c' }}" readonly>
+        <br><br>
+        <label for="session">Session: </label>
+        <input type="number" name="session1" id="session1id" value="{{ student_session1 }}" required readonly>
+        <em>to</em>
+        <input type="number" name="session2" id="session2id" value="{{ student_session2 }}" required readonly>
+        <br><br>
+        <br><br>
+        <button type="submit" id="updatebutton" style="visibility: hidden;">Update</button>
+    </form>
+    <br><br>
+    <button id="editbutton">Edit Details</button>
+</body>
+<script>
+    document.getElementById("editbutton").onclick = function () {
+        document.getElementById("nameid").readOnly = false;
+        document.getElementById("dateid").readOnly = false;
+        document.getElementById("session1id").readOnly = false;
+        document.getElementById("session2id").readOnly = false;
+        document.getElementById("updatebutton").style.visibility = 'visible';
+    }
+</script>
+</html>
